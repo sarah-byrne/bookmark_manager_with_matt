@@ -1,3 +1,4 @@
+require './lib/bookmark_storer'
 require 'sinatra/base'
 
 class Bookmark < Sinatra::Base
@@ -11,6 +12,7 @@ class Bookmark < Sinatra::Base
   end
 
   get '/bookmarks' do
+    @bookmark_storer = Bookmark_Storer.new
     erb :bookmarks
   end
 
