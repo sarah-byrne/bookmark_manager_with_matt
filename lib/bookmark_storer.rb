@@ -1,14 +1,17 @@
 require 'pg'
 
 class Bookmark_Storer
-
-  def initialize(dbname='bookmark_manager')
-    @dbname = dbname
+  def initialize()
     @bookmarks = []
   end
 
-  def view_bookmarks
-    conn = PG.connect( dbname: @dbname )
+  def self.view_bookmarks
+    if ENV['ENVIRONMENT'] == 'test'
+      conn = PG.connect( dbname: 'bookmark_manager_test' )
+    else
+      conn = PG.connect( dbname: 'bookmark_manager' )
+    end
+
     conn.exec( "SELECT * FROM bookmarks" ) do |result|
       result.each do |row|
         @bookmarks << row["url"]
