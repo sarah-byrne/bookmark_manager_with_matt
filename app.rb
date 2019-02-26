@@ -12,7 +12,7 @@ class Bookmark < Sinatra::Base
   end
 
   get '/bookmarks' do
-    @bookmark_storer = Bookmark_Storer.new
+    @bookmarks = Bookmark_Storer.view_bookmarks
     erb :bookmarks
   end
 

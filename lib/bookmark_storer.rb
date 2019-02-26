@@ -1,9 +1,6 @@
 require 'pg'
 
 class Bookmark_Storer
-  def initialize()
-    @bookmarks = []
-  end
 
   def self.view_bookmarks
     if ENV['ENVIRONMENT'] == 'test'
@@ -12,6 +9,7 @@ class Bookmark_Storer
       conn = PG.connect( dbname: 'bookmark_manager' )
     end
 
+    @bookmarks = []
     conn.exec( "SELECT * FROM bookmarks" ) do |result|
       result.each do |row|
         @bookmarks << row["url"]
