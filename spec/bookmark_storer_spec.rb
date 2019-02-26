@@ -11,7 +11,7 @@ describe Bookmark_Storer do
     conn = PG.connect( dbname: 'bookmark_manager_test' )
     conn.exec( "TRUNCATE bookmarks" )
     conn.exec( "INSERT INTO bookmarks (id, url)
-              VALUES (1, 'http://www.makersacademy.com/') ")
+              VALUES (1, 'http://www.makersacademy.com') ")
     expect(bookmarks.view_bookmarks).to include('http://www.makersacademy.com')
   end
 
